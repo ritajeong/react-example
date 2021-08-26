@@ -1,0 +1,24 @@
+{
+  "name": "react-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ritajeong/react-example.git"
+  },
+  "author": "ritajeong",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ritajeong/react-example/issues"
+  },
+  "homepage": "https://github.com/ritajeong/react-example#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^6.0.1"
+  }
+}
