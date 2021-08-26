@@ -24,6 +24,7 @@ mongoose.connect(config.mongoURI, {
   app.post('/register', (req,res) => {
     //client가 보낸 회원가입 정보를 db에 저장
     const user = new User(req.body)
+    
     user.save((err,userInfo)=>{
       if(err) return res.json({success: false, err}) //err메세지를 같이 전달
       return res.status(200).json({
