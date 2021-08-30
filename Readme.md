@@ -1,13 +1,12 @@
 ### package.json **dependencies** 목록
-
 - "express": "^4.17.1",
-
--  "mongoose": "^6.0.1"
+- "mongoose": "^6.0.1"
 - "body-parser": "^1.19.0"
-
+- "cookie-parser": "^1.4.5",
 Http 통신은 Client의 요청(Request)이 있을 대만 서버가 응답(Response)하는 단방향 통신이다. 
 
 이 때, **body-parse**r는 Body 데이터를 분석(parse)해서 req.body로 출력한다. 
+**cookie-parser**는 쿠키를 쉽게 추출할 수 있도록 도와주는 미들웨어이다. req.cookies처럼 쿠키값을 확인할 수 있다.  
 
 ### package.json **devDependencies** 목록
 
@@ -33,6 +32,8 @@ key.js에서 production모드일 때와 개발모드일 때를 분기한다.
 
 ### bcrypt, salt
 
+- "bcrypt": "^5.0.1" 
+
 DB에 비밀번호를 암호화해서 저장하기 위해 bcrypt 라이브러리를 사용함.
 
 [bcrypt npm 사이트 참고, Usage 부분](https://www.npmjs.com/package/bcrypt)
@@ -45,7 +46,9 @@ User.js에서 saltRounds = 10으로, 10자리의 salt를 먼저 생성한다.
 
 
 
-### jsonwebtoken
+### jsonwebtoken  
+
+- "jsonwebtoken": "^8.5.1"  
 
 - npm에서 install
 
@@ -82,4 +85,3 @@ user._id에 secretToken을 붙여서 Encode하여 token을 생성한다.
 
 서버에서 해당 User ID가 있는지 확인한다. 
 
- 
