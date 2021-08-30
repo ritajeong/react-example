@@ -45,3 +45,41 @@ User.js에서 saltRounds = 10으로, 10자리의 salt를 먼저 생성한다.
 
 
 
+### jsonwebtoken
+
+- npm에서 install
+
+  npm install jsonwebtoken
+
+- User.js에서 jwt로 토큰을 생성한다. 
+
+```javascript
+var token = jwt.sign(user._id.toHexString()), 'secretToken')
+user.token = token
+```
+
+user._id에 secretToken을 붙여서 Encode하여 token을 생성한다.
+
+이 토큰을 Decode하면 seceretToken과 user._id를 알 수 있다. 
+
+
+
+### Auth
+
+특정 페이지에 접근할 때 로그인 여부를 확인해야할 때가 있다. 또는 글을 수정하거나 지울 때, 작성자만이 할 수 있으므로 권한 체크가 필요하다. 
+
+토큰을 만든 후, 토큰을 유저정보에 넣어준다. 
+
+브라우저에서는 토큰을 쿠키에 저장했고, 서버에서는 DB의 User DB에 저장했다. 인증은 이 두 저장소를 비교해서 확인할 수 있다.
+
+- 과정
+
+만약 관리자가 아닌 유저가 관리자 페이지에 접근했다고 가정하자.
+
+클라이언트에서는 쿠키에 저장된 토큰을 서버로 전송한다.
+
+서버쪽으로 전달할 때, 토큰이 Encode된 상태니까 이것을 Decode해서 User ID를 찾아낸다.
+
+서버에서 해당 User ID가 있는지 확인한다. 
+
+ 

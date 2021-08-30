@@ -3,10 +3,10 @@ const app = express()
 const port = 5000
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
-
 const config = require('./config/key')
 
 const { User } = require("./models/User")
+const { auth } = require("./middleware/auth")
 
 app.use(bodyParser.urlencoded({extended: true})) //application/x-www-form-urlencoded
 app.use(bodyParser.json()) //json 타입
@@ -23,7 +23,7 @@ mongoose.connect(config.mongoURI, {
   app.listen(port, ()=> console.log(`Example app listeng on port  ${port}!`))
   
   
-  app.post('/register', (req,res) => {
+  app.post('/api/users/register', (req,res) => {
     //client가 보낸 회원가입 정보를 db에 저장
     console.log(req)
     const user = new User(req.body)
@@ -37,7 +37,7 @@ mongoose.connect(config.mongoURI, {
     })
   })
 
-  app.post('login', (req, res) => {
+  app.post('/api/users/login', (req, res) => {
     console.log(req)
     //요청된 이메일이 db에 있는지 확인->있으면 비밀번호 체크->맞으면 토큰생성
     User.findOne({ email: req.body.email }, (err, user) => {
@@ -64,3 +64,19 @@ mongoose.connect(config.mongoURI, {
       })
     })
   })
+
+
+// role이 0이면 회원, 아니면 관리자
+app.get('/api/users/auth', auth, (req, res) => {
+  //이 시점에 도착했다 == middleware통과, 즉 Auth 인증에서 true
+  res.status(200).json({
+    _id: req.user._id,
+    isAdmin: req.user.role === 0 ? false : true,
+    isAuth: true,
+    email: req.user.email,
+    name: req.user.name,
+    lastname: req.user.lastname,
+    role: req.user.role,
+    image: req.user.image
+  })
+})
