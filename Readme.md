@@ -29,3 +29,19 @@ key.js에서 production모드일 때와 개발모드일 때를 분기한다.
 
 (환경변수 process.env.NODE_ENV가 Local 환경에서 development를 가지고, 배포후에는 production을 가지므로 key.js에서 적절히 분기한다.)
 
+
+
+### bcrypt, salt
+
+DB에 비밀번호를 암호화해서 저장하기 위해 bcrypt 라이브러리를 사용함.
+
+[bcrypt npm 사이트 참고, Usage 부분](https://www.npmjs.com/package/bcrypt)
+
+Register Route에서 유저정보를 DB에 저장하기 전에 암호화 로직을 작성한다. 
+
+User.js에서 saltRounds = 10으로, 10자리의 salt를 먼저 생성한다.
+
+그리고 bcrypt의 genSalt로 salt를 생성해서 hash 비밀번호를 만든 뒤 암호화를 완료한다. 
+
+
+
