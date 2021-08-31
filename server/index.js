@@ -19,9 +19,7 @@ mongoose.connect(config.mongoURI, {
   .catch(err => console.log(err))
 
   app.get('/', (req, res) => res.send('Hello World!'))
-
-  app.listen(port, ()=> console.log(`Example app listeng on port  ${port}!`))
-  
+  app.get('/api/hello', (req, res) => res.send('Hello!'))
   
   app.post('/api/users/register', (req,res) => {
     //client가 보낸 회원가입 정보를 db에 저장
@@ -92,3 +90,4 @@ app.get('/api/users/logout', auth, (req, res) => {
     })
 })
 
+app.listen(port, ()=> console.log(`Example app listeng on port  ${port}!`))
