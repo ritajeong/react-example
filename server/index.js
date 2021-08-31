@@ -25,9 +25,9 @@ mongoose.connect(config.mongoURI, {
   
   app.post('/api/users/register', (req,res) => {
     //client가 보낸 회원가입 정보를 db에 저장
-    console.log(req)
+    // console.log(req)
     const user = new User(req.body)
-    console.log(user)
+    // console.log(user)
 
     user.save((err,userInfo)=>{
       if(err) return res.json({success: false, err}) //err메세지를 같이 전달
@@ -38,7 +38,7 @@ mongoose.connect(config.mongoURI, {
   })
 
   app.post('/api/users/login', (req, res) => {
-    console.log(req)
+    // console.log(req)
     //요청된 이메일이 db에 있는지 확인->있으면 비밀번호 체크->맞으면 토큰생성
     User.findOne({ email: req.body.email }, (err, user) => {
       if(!user){
